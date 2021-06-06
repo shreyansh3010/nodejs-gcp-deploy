@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-gcp-deploy",
+  "version": "1.0.0",
+  "description": "Trying to dedploy node js appliction on gcp by containerizing it using docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreyansh3010/nodejs-gcp-deploy.git"
+  },
+  "author": "shreyansh3010",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shreyansh3010/nodejs-gcp-deploy/issues"
+  },
+  "homepage": "https://github.com/shreyansh3010/nodejs-gcp-deploy#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
