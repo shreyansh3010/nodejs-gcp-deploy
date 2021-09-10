@@ -4,7 +4,7 @@ ENV PORT 2000
 
 WORKDIR /usr/src/app
 
-COPY package*.json /
+COPY package.json package.json 
 
 RUN npm install
 

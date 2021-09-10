@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000
 
 app.get('/api', (req, res) => {
-    res.send('Hello brother')
+    res.send('Deployed on GCP App Engine')
 })
 
 app.listen(port, (err) => {
