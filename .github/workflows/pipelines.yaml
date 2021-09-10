@@ -16,7 +16,7 @@ env :
 jobs : 
   setup-build-publish :
     name : Setup build, publish & deploy
-    runs-on : unbuntu-latest
+    runs-on : ubuntu-latest
 
     steps:
       - name : Checkout Respository
