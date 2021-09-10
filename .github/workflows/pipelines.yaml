@@ -1,0 +1,45 @@
+name : GKE  Deployment
+
+on : 
+  push :
+    branches : 
+      - main
+
+env : 
+  PROJECT_ID : ${{secrets.GKE_PROJECT}}
+  GKE_CLUSTER : anton-prod-gke
+  GKE_ZONE : us-central1-c
+  DEPLOYMENT_NAME : github-actions-gke-deployment
+  IMAGE : github-actions-gke-image
+  TAG : 1.0.0
+
+jobs : 
+  setup-build-publish :
+    name : Setup build, publish & deploy
+    runs-on : unbuntu-latest
+
+  steps:
+    - name : Checkout Respository
+      uses : actions/checkout@v2
+
+    - name : Setup Google Cloud CLI
+      uses : GoogleCloudPlatform/github-action/setup-gcloud@0.1.3
+      env :
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      with :
+        service_account_key : ${{secrets.GKE_KEY}}
+        project_id : ${{secrets.GKE_PROJECT}}
+
+    - name : Configure Docker
+      run :  gcloud --quiet auth configure-docker
+
+    - name : Get GKE Credentials
+      run : gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "GKE_ZONE"
+
+    - name : Build Docker Image
+      run : docker build --tag "gcr.io/$PROJECT_ID/$IMAGE:$TAG"
+
+    - name : Publish Docker Image To GCR
+      run : docker push "gcr.io/$PROJECT_ID/$IMAGE:$TAG"
+
+    
